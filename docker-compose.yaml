@@ -16,10 +16,10 @@ services:
       - tp-foyer-network
 
   tp-foyer:
-#    image: melekhomrani/tp-foyer:1.0.0
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: melekhomrani/tp-foyer:1.0.0
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
     container_name: tp-foyer
     depends_on:
       - mysqldb
