@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_tp_esprit
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - tp-foyer-network
+
+  tp-foyer:
+#    image: melekhomrani/tp-foyer:1.0.0
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: tp-foyer
+    depends_on:
+      - mysqldb
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    networks:
+      - tp-foyer-network
+    stdin_open: true
+    tty: true
+
+networks:
+  tp-foyer-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
