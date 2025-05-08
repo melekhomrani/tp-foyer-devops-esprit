@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine as mvn-build
+FROM openjdk:17-alpine AS mvn-build
 WORKDIR /app/build
 COPY ./src ./src
 COPY pom.xml .
